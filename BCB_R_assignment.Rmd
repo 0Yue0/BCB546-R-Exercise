@@ -1,0 +1,41 @@
+---
+title: "BCB_R_assignment"
+author: "Lena Liu"
+date: "2023-03-02"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# set enviroment
+```{r}
+library("tidyr")
+library("tidyverse")
+```
+
+
+
+# select maize and teosinte SNP data based on groups and assign selceted rows into new variables 
+```{r}
+snp_data <- read_table("fang_et_al_genotypes.txt")
+maize <- filter(snp_data, Group %in% c('ZMMIL', 'ZMMLR', 'ZMMMR'))
+teosinte <- filter(snp_data, Group %in% c('ZMPBA', 'ZMPIL', 'ZMPJA'))
+```
+
+# transpose maize and teosinte SNP data and assign new variables
+```{r}
+maize_t <- t(maize)
+teosinte_t <- t(teosinte)
+```
+
+
+
+
+# extract SNP IDs from "snp_position.txt" and assign new variables
+```{r}
+snp_position <- read_table("snp_position.txt")
+snp_id <- select(snp_position, SNP_ID, Chromosome, Position)
+```
+
